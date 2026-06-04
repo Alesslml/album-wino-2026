@@ -1,0 +1,15 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(bun install *)",
+      "Bash(npm --version)",
+      "Bash(npm install *)",
+      "Bash(cd \"/Users/aless/Documents/Absolux/Album wino/album-wino-main\" && rm -rf node_modules && npm install 2>&1)",
+      "Bash(npm run *)",
+      "Bash(cat /tmp/vite_dev.log)",
+      "Bash(jobs)",
+      "Bash(npx tsc *)",
+      "Read(//tmp/**)"
+    ]
+  }
+}
