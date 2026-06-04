@@ -11,7 +11,15 @@
       "Bash(vercel --version)",
       "Bash(git init *)",
       "Bash(git add *)",
-      "Bash(git commit *)"
+      "Bash(git commit *)",
+      "Bash(gh repo *)",
+      "Bash(vercel link *)",
+      "Bash(vercel --prod)",
+      "Bash(vercel ls *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://album-wino-main.vercel.app\")",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\" \"https://album-wino-main-n6ty2i66w-aless-projects3.vercel.app\")",
+      "Bash(vercel logs *)",
+      "Bash(git push *)"
     ]
   }
 }
