@@ -23,7 +23,8 @@ function PaisDetalle() {
     [all, codigo],
   );
   const nombre = views[0]?.pais_seccion ?? codigo;
-  const tengo = views.filter((v) => isConseguida(v.entry)).length;
+  const tengo = useMemo(() => views.filter((v) => isConseguida(v.entry)), [views]);
+  const faltan = useMemo(() => views.filter((v) => !isConseguida(v.entry)), [views]);
 
   return (
     <div>
@@ -35,12 +36,48 @@ function PaisDetalle() {
       </Link>
       <PageHeader title={`${nombre} (${codigo})`} description={`${views.length} figuras en total`} />
       <div className="mb-6 max-w-md">
-        <ProgressBar value={tengo} total={views.length} />
+        <ProgressBar value={tengo.length} total={views.length} />
       </div>
-      <StickerTable
-        views={views}
-        columns={["codigo_completo", "nombre", "tipo", "estado", "cantidad", "repetidas", "acciones"]}
-      />
+
+      {/* Tengo */}
+      <section className="mb-8">
+        <div className="mb-3 flex items-center gap-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-green-500" />
+          <h2 className="font-semibold text-green-700 dark:text-green-400">
+            Tengo ({tengo.length})
+          </h2>
+        </div>
+        {tengo.length === 0 ? (
+          <p className="rounded-xl border border-dashed border-border bg-card/50 p-6 text-center text-sm text-muted-foreground">
+            Todavía no tenés ninguna figura de este país.
+          </p>
+        ) : (
+          <StickerTable
+            views={tengo}
+            columns={["codigo_completo", "nombre", "tipo", "estado", "cantidad", "repetidas", "acciones"]}
+          />
+        )}
+      </section>
+
+      {/* Faltan */}
+      <section>
+        <div className="mb-3 flex items-center gap-2">
+          <span className="h-2.5 w-2.5 rounded-full bg-red-400" />
+          <h2 className="font-semibold text-red-600 dark:text-red-400">
+            Faltan ({faltan.length})
+          </h2>
+        </div>
+        {faltan.length === 0 ? (
+          <p className="rounded-xl border border-dashed border-border bg-card/50 p-6 text-center text-sm text-muted-foreground">
+            ¡País completo! 🎉
+          </p>
+        ) : (
+          <StickerTable
+            views={faltan}
+            columns={["marcar", "codigo_completo", "nombre", "tipo", "acciones"]}
+          />
+        )}
+      </section>
     </div>
   );
 }

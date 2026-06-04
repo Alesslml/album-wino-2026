@@ -115,7 +115,7 @@ function ImportarPage() {
             />
           </label>
           {msg && <p className="mt-3 text-sm">{msg}</p>}
-          <div className="mt-6 border-t border-border pt-4">
+          <div className="mt-6 border-t border-border pt-4 space-y-2">
             <p className="mb-2 text-xs text-muted-foreground">
               ⚠ Importar reemplaza todas las figuras y borra tu progreso actual.
             </p>
@@ -126,6 +126,16 @@ function ImportarPage() {
               className="inline-flex items-center gap-2 rounded-md border border-border px-3 py-1.5 text-xs hover:bg-muted"
             >
               <RotateCcw className="h-3.5 w-3.5" /> Restaurar checklist provisional
+            </button>
+            <button
+              onClick={() => {
+                if (confirm("¿Borrar TODO el progreso y empezar de cero? Esta acción no se puede deshacer.")) {
+                  resetSeed();
+                }
+              }}
+              className="inline-flex items-center gap-2 rounded-md border border-red-300 bg-red-50 px-3 py-1.5 text-xs text-red-600 hover:bg-red-100"
+            >
+              <RotateCcw className="h-3.5 w-3.5" /> Borrar todo y empezar de 0
             </button>
           </div>
         </div>
